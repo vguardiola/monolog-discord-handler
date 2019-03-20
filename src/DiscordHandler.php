@@ -71,12 +71,18 @@ class DiscordHandler extends AbstractProcessingHandler
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function send($webHook, $content){
-        $this->guzzle->request(
-            'POST', $webHook, [
-                'form_params' => [
-                    'content' => $content
+        try {
+            $this->guzzle->request(
+                'POST',
+                $webHook,
+                [
+                    'form_params' => [
+                        'content' => $content,
+                    ],
                 ]
-            ]
-        );
+            );
+        } catch (\Exception $e) {
+
+        }
     }
 }
